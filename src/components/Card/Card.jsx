@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./_Card.module.scss";
 
 const Card = (props) => {
-    const { response } = props;
+    const { response, totalPlayers } = props;
     return (
         <article>
             <h1 id="current-player">{response.name}</h1>

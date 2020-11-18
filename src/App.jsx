@@ -3,11 +3,24 @@ import Card from "./components/Card";
 import Form from "./components/Form";
 
 function App() {
-  const [response, setResponse] = useState("")
+  const [initialCard, setInitialCard] = useState("");
+  const [totalPlayers, setTotalPlayers] = useState([]);
+  const [totalTeams, setTotalTeams] = useState([]);
+
   const read = () => {
-    return fetch("http://localhost:8080")
+    return fetch("https://sheltered-ocean-24674.herokuapp.com/")
       .then(res => res.json())
-      .then(res => setResponse(res))
+      .then(res => setInitialCard(res))
+  }
+
+  const readFF = () => {
+    fetch("https://sheltered-ocean-24674.herokuapp.com/ffdata")
+      .then(res => res.json())
+      .then(res => {
+        setTotalPlayers(res.players);
+        setTotalTeams(res.teams);
+        console.log(res.players);
+      })
   }
 
   const deletePlayer = () => {
@@ -22,47 +35,29 @@ function App() {
             body: JSON.stringify(data),
         }
 
-        fetch("http://localhost:8080/delete", fetchOptions)
+        fetch("https://sheltered-ocean-24674.herokuapp.com/delete", fetchOptions)
             .then(response => response.json())
             .then(response => console.log(response))
   }
 
-  // const testFunction = () => {
-  //   e.preventDefault();
-  //       const data = {
-  //           name: document.getElementById("name").value,
-  //       }
-  //       const fetchOptions = {
-  //           method: "POST",
-  //           headers: {
-  //               "Content-Type": "application/json"
-  //           },
-  //           body: JSON.stringify(data),
-  // //       }
-
-  //       fetch("http://localhost:8080/create", fetchOptions)
-  //           .then(response => response.json())
-  //           .then(response => console.log(response))
-  // // }
-
   useEffect(() => {
     read();
+    readFF();
   }, [])
 
   return (
     <>
       <div className="App">
-        {response ?
+        {initialCard ?
           <>
-            <Card response={response} />
+            <Card response={initialCard} totalPlayers={totalPlayers} />
             <button onClick={() => read()}>Click to see another player!!!!</button>
           </> :
-          <h1>Sorry, this api is wack</h1>
+          <h1>Hold on while we load the data...</h1>
         }
       </div>
       <button onClick={deletePlayer}>Delete this player</button>
-      <Form />
-      {/* <button onClick={testFunction}></button> */}
+      <Form totalTeams={totalTeams} totalPlayers={totalPlayers} />
     </>
   );
 }
