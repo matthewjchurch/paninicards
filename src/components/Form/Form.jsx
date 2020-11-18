@@ -7,12 +7,12 @@ const Form = (props) => {
     const [selectedPlayer, setSelectedPlayer] = useState({});
     const [displayedPlayer, setDisplayedPlayer] = useState("");
 
-    const getTeamOptions = (team) => {
+    const getTeamOptions = team => {
         let teamData = `${team.name} (${team.id})`
         return <option value={teamData}>{teamData}</option>
     }
-
-    const getPlayerOptions = (player) => {
+    
+    const getPlayerOptions = player => {
         let id = selectedTeam.match(/\d+/gm);
         if (player.team === parseInt(id[0])) {
             let playerData = `${player.first_name} ${player.second_name} (${player.id})`
@@ -30,12 +30,12 @@ const Form = (props) => {
         return totalPlayers.filter(player => player.id === id)[0]
     }
 
-    const handleChangeTeam = (e) => {
+    const handleChangeTeam = e => {
         setSelectedTeam(e.target.value);
         setSelectedPlayer(findPlayer(document.getElementById("players-options").value))
     }
 
-    const handleChangePlayer = (e) => {
+    const handleChangePlayer = e => {
         setSelectedPlayer(findPlayer(e.target.value));
     }
 

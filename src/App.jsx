@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Card from "./components/Card";
-import Form from "./components/Form";
+import React, { useEffect, useState, useContext } from "react";
+import { UserProvider, UserContext } from "./context/UserContext";
+import Routes from "./Routes";
 
 function App() {
   const [initialCard, setInitialCard] = useState("");
   const [totalPlayers, setTotalPlayers] = useState([]);
   const [totalTeams, setTotalTeams] = useState([]);
+  const { user } = useContext(UserContext);
 
   const read = () => {
     return fetch("https://sheltered-ocean-24674.herokuapp.com/")
@@ -46,19 +47,9 @@ function App() {
   }, [])
 
   return (
-    <>
-      <div className="App">
-        {initialCard ?
-          <>
-            <Card response={initialCard} totalPlayers={totalPlayers} />
-            <button onClick={() => read()}>Click to see another player!!!!</button>
-          </> :
-          <h1>Hold on while we load the data...</h1>
-        }
-      </div>
-      <button onClick={deletePlayer}>Delete this player</button>
-      <Form totalTeams={totalTeams} totalPlayers={totalPlayers} />
-    </>
+    <UserProvider> 
+      <Routes initialCard={initialCard} totalPlayers={totalPlayers} totalTeams={totalTeams} />
+    </UserProvider>
   );
 }
 
