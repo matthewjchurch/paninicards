@@ -6,7 +6,6 @@ function App() {
   const [initialCard, setInitialCard] = useState("");
   const [totalPlayers, setTotalPlayers] = useState([]);
   const [totalTeams, setTotalTeams] = useState([]);
-  const { user } = useContext(UserContext);
 
   const read = () => {
     return fetch("https://sheltered-ocean-24674.herokuapp.com/")

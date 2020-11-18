@@ -5,7 +5,7 @@ import { navigate } from "@reach/router";
 export const UserContext = createContext({});
 
 export const UserProvider = (props) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
@@ -17,8 +17,8 @@ export const UserProvider = (props) => {
         })
     }
 
-    const signInGoogle = () => {
-        firebase
+    const signInGoogle = async () => {
+        await firebase
             .auth()
             .signInWithPopup(googleProvider)
             .then(result => {
