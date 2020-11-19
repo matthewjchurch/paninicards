@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { UserProvider, UserContext } from "./context/UserContext";
+import React, { useEffect, useState } from "react";
+import { UserProvider } from "./context/UserContext";
 import Routes from "./Routes";
 
 function App() {

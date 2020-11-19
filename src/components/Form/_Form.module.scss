@@ -1,16 +1,41 @@
+@import "../../assets/variables";
+
 section {
     width: 100vw;
-    margin: 20px;
-    background-color: rgb(13, 13, 150);
+    background-color:$purple;
     color: white;
+    padding: 10px;
+
+    h2 {
+        padding: 0 10px
+    }
     
     form {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: left;
         
-        label, input {
-            width: 50vw;
+        > * {
+            padding: 0;
+            margin: 5px 30px;
+        }
+        
+        fieldset {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border: none;
+            width: 500px;
+            
+            label, input, select {
+                width: 250px;
+            }
+        }
+        
+        button {
+            width: 500px;
+            height: 50px;
+            background-color: $green;
         }
     }
 }

@@ -10,8 +10,8 @@ const Dashboard = (props) => {
     return (
         <>
         {console.log(user)}
-            <Card response={initialCard} />
             <Form totalTeams={totalTeams} totalPlayers={totalPlayers}  />
+            
         </>
     )
 }

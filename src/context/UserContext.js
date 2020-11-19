@@ -5,7 +5,7 @@ import { navigate } from "@reach/router";
 export const UserContext = createContext({});
 
 export const UserProvider = (props) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 

@@ -92,23 +92,30 @@ const Form = (props) => {
     
     return (
         <section>
+            <h2>Select a player to follow:</h2>
             <form>
-                <label htmlFor="team">Team:</label>
-                <select 
-                    name="teams" 
-                    id="teams-options" 
-                    onChange={handleChangeTeam}>
-                        {totalTeams.map(getTeamOptions)}
-                </select>
-                <label htmlFor="name">Player:</label>
-                <select 
-                    name="players" 
-                    id="players-options"
-                    onChange={handleChangePlayer}>
-                        {totalPlayers.map(getPlayerOptions)}
-                </select>
-                <label htmlFor="img">Image URL (optional):</label>
-                <input id="img" type="text"/>
+                <fieldset>
+                    <label htmlFor="team">Team:</label>
+                    <select 
+                        name="teams" 
+                        id="teams-options" 
+                        onChange={handleChangeTeam}>
+                            {totalTeams.map(getTeamOptions)}
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="name">Player:</label>
+                    <select 
+                        name="players" 
+                        id="players-options"
+                        onChange={handleChangePlayer}>
+                            {totalPlayers.map(getPlayerOptions)}
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="img">Image URL (optional):</label>
+                    <input id="img" type="text"/>
+                </fieldset>
                 <button 
                     type="submit"
                     onClick={handleSubmit}>
