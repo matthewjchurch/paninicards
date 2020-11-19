@@ -17,7 +17,7 @@ const Dashboard = (props) => {
     return (
         <>
         {console.log(user)}
-            <Form totalTeams={totalTeams} totalPlayers={totalPlayers}  />
+            <Form user={user} totalTeams={totalTeams} totalPlayers={totalPlayers}  />
 
         </>
     )

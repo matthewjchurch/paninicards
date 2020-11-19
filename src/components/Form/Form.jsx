@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { addPlayer } from "../../services/MongoDBService";
 import "./_Form.module.scss";
 
 const Form = (props) => {
-    const { totalTeams, totalPlayers } = props;
+    const { user, totalTeams, totalPlayers } = props;
     const [selectedTeam, setSelectedTeam] = useState("Arsenal (1)");
     const [selectedPlayer, setSelectedPlayer] = useState({});
     const [displayedPlayer, setDisplayedPlayer] = useState("");
@@ -32,7 +33,9 @@ const Form = (props) => {
 
     const handleChangeTeam = e => {
         setSelectedTeam(e.target.value);
-        setSelectedPlayer(findPlayer(document.getElementById("players-options").value))
+        setTimeout(() => {
+            setSelectedPlayer(findPlayer(document.getElementById("players-options").value))
+        }, 100);
     }
 
     const handleChangePlayer = e => {
@@ -62,7 +65,15 @@ const Form = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        
+        const data = {
+            uid: user.uid,
+            name: `${selectedPlayer.first_name} ${selectedPlayer.second_name}`,
+            playerID: selectedPlayer.id,
+            position: playerPosition(selectedPlayer.element_type),
+            img: document.getElementById("img").value
+        }
+        console.log(data);
+        // addPlayer(data);
     }
 
     useEffect(() => {

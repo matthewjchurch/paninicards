@@ -1,24 +1,24 @@
-// export const addPlayer = () => {
+export const addPlayer = (data) => {
 
-//     const data = {
-//         name: `${selectedPlayer.first_name} ${selectedPlayer.second_name}`,
-//         playerID: selectedPlayer.id,
-//         position: playerPosition(selectedPlayer.element_type),
-//         img: document.getElementById("img").value
-//     }
+    // const data = {
+    //     name: `${selectedPlayer.first_name} ${selectedPlayer.second_name}`,
+    //     playerID: selectedPlayer.id,
+    //     position: playerPosition(selectedPlayer.element_type),
+    //     img: document.getElementById("img").value
+    // }
 
-//     const fetchOptions = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(data),
-//     }
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data),
+    }
 
-//     fetch("https://sheltered-ocean-24674.herokuapp.com/create", fetchOptions)
-//         .then(response => response.json())
-//         .then(response => console.log(response))
-// }
+    fetch("http://localhost:8080/addPlayer", fetchOptions)
+        .then(response => response.json())
+        .then(response => console.log(response))
+}
 
 export const createNewUser = (user) => {
     console.log(user.uid);
