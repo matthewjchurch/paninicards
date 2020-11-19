@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 import firebase, { googleProvider } from "../firebase";
 import { navigate } from "@reach/router";
+import { createNewUser } from "../services/MongoDBService";
 
 export const UserContext = createContext({});
 
@@ -23,6 +24,7 @@ export const UserProvider = (props) => {
             .signInWithPopup(googleProvider)
             .then(result => {
                 setUser(result.user);
+                createNewUser(result.user);
                 navigate("/dashboard");
         })
     }

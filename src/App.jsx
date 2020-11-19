@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { UserProvider } from "./context/UserContext";
+
 import Routes from "./Routes";
 
 function App() {
   const [initialCard, setInitialCard] = useState("");
-  const [totalPlayers, setTotalPlayers] = useState([]);
-  const [totalTeams, setTotalTeams] = useState([]);
 
   const read = () => {
     return fetch("https://sheltered-ocean-24674.herokuapp.com/")
       .then(res => res.json())
       .then(res => setInitialCard(res))
-  }
-
-  const readFF = () => {
-    fetch("https://sheltered-ocean-24674.herokuapp.com/ffdata")
-      .then(res => res.json())
-      .then(res => {
-        setTotalPlayers(res.players);
-        setTotalTeams(res.teams);
-        console.log(res.players);
-      })
   }
 
   const deletePlayer = () => {
@@ -42,12 +31,11 @@ function App() {
 
   useEffect(() => {
     read();
-    readFF();
   }, [])
 
   return (
     <UserProvider> 
-      <Routes initialCard={initialCard} totalPlayers={totalPlayers} totalTeams={totalTeams} />
+      <Routes initialCard={initialCard} />
     </UserProvider>
   );
 }
