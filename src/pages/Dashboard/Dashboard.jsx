@@ -1,24 +1,27 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import { readFF } from "../../services/PFLService";
-import Card from '../../components/Card'
 import Form from '../../components/Form'
+import Watchlist from './Watchlist/Watchlist';
 
 const Dashboard = (props) => {
     const { initialCard } = props;
+    const { user } = useContext(UserContext);
     const [totalPlayers, setTotalPlayers] = useState([]);
     const [totalTeams, setTotalTeams] = useState([]);
-    const { user } = useContext(UserContext);
 
     useEffect(() => {
         readFF(setTotalTeams, setTotalPlayers);
     }, [])
 
+    // useEffect(() => {
+    //     console.log(watchlist);
+    // }, [watchlist])
+
     return (
         <>
-        {console.log(user)}
             <Form user={user} totalTeams={totalTeams} totalPlayers={totalPlayers}  />
-
+            <Watchlist user={user} />
         </>
     )
 }

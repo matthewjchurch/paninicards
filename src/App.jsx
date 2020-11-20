@@ -6,12 +6,6 @@ import Routes from "./Routes";
 function App() {
   const [initialCard, setInitialCard] = useState("");
 
-  const read = () => {
-    return fetch("https://sheltered-ocean-24674.herokuapp.com/")
-      .then(res => res.json())
-      .then(res => setInitialCard(res))
-  }
-
   const deletePlayer = () => {
     const data = {
             name: document.getElementById("current-player").innerText,
@@ -30,7 +24,7 @@ function App() {
   }
 
   useEffect(() => {
-    read();
+    // read();
   }, [])
 
   return (

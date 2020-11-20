@@ -1,0 +1,40 @@
+import React, { useEffect, useState } from "react";
+import { getWatchlist } from "../../../services/MongoDBService";
+
+const Watchlist = (props) => {
+    const { user } = props;
+    const [watchlist, setWatchlist] = useState([]);
+
+    const getTableJSX = (player) => {
+        return (
+            <tr key={player.name}>
+                <td>{player.name}</td>
+                <td>{player.position}</td>
+            </tr>
+        )
+    }
+
+    useEffect(() => {
+        getWatchlist(setWatchlist, user);
+    }, [])
+
+    useEffect(() => {
+        console.log(watchlist);
+    }, [watchlist])
+
+    return (
+        <table>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                {watchlist.length ? watchlist.map(getTableJSX) : null}
+            </tbody>
+        </table>
+    )
+}
+
+export default Watchlist
