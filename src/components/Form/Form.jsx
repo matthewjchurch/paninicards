@@ -67,13 +67,11 @@ const Form = (props) => {
 
         const data = {
             uid: user.uid,
-            name: `${selectedPlayer.first_name} ${selectedPlayer.second_name}`,
-            playerID: selectedPlayer.id,
             position: playerPosition(selectedPlayer.element_type),
-            img: document.getElementById("img").value
+            img: document.getElementById("img").value,
+            ...selectedPlayer
         }
-        console.log(data);
-        // addPlayer(data);
+        addPlayer(data);
     }
 
     useEffect(() => {

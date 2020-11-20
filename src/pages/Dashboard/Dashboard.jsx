@@ -5,7 +5,6 @@ import Form from '../../components/Form'
 import Watchlist from './Watchlist/Watchlist';
 
 const Dashboard = (props) => {
-    const { initialCard } = props;
     const { user } = useContext(UserContext);
     const [totalPlayers, setTotalPlayers] = useState([]);
     const [totalTeams, setTotalTeams] = useState([]);
@@ -13,10 +12,6 @@ const Dashboard = (props) => {
     useEffect(() => {
         readFF(setTotalTeams, setTotalPlayers);
     }, [])
-
-    // useEffect(() => {
-    //     console.log(watchlist);
-    // }, [watchlist])
 
     return (
         <>

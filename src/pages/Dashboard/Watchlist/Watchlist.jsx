@@ -7,8 +7,8 @@ const Watchlist = (props) => {
 
     const getTableJSX = (player) => {
         return (
-            <tr key={player.name}>
-                <td>{player.name}</td>
+            <tr key={player.id}>
+                <td>{player.first_name} {player.second_name}</td>
                 <td>{player.position}</td>
             </tr>
         )
@@ -28,10 +28,11 @@ const Watchlist = (props) => {
                 <tr>
                     <th>Player</th>
                     <th>Position</th>
+                    {/* th* */}
                 </tr>
             </thead>
             <tbody>
-                {watchlist.length ? watchlist.map(getTableJSX) : null}
+                {watchlist && watchlist.length ? watchlist.map(getTableJSX) : null}
             </tbody>
         </table>
     )
