@@ -15,12 +15,10 @@ const Watchlist = (props) => {
     }
 
     useEffect(() => {
-        getWatchlist(setWatchlist, user);
-    }, [])
-
-    useEffect(() => {
-        console.log(watchlist);
-    }, [watchlist])
+        if (user) {
+            getWatchlist(setWatchlist, user);
+        }
+    }, [user])
 
     return (
         <table>

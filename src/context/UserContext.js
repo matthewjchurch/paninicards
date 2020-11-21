@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import firebase, { googleProvider } from "../firebase";
 import { navigate } from "@reach/router";
 import { createNewUser } from "../services/MongoDBService";
@@ -10,13 +10,11 @@ export const UserProvider = (props) => {
 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-    const getUser = () => {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user){
-                setUser(user);
-            }
-        })
-    }
+    firebase.auth().onAuthStateChanged(user => {
+        if (user){
+            setUser(user);
+        }
+    })
 
     const signInGoogle = async () => {
         await firebase
@@ -24,17 +22,28 @@ export const UserProvider = (props) => {
             .signInWithPopup(googleProvider)
             .then(result => {
                 setUser(result.user);
+                localStorage.setItem("user", JSON.stringify(result.user))
                 createNewUser(result.user);
                 navigate("/dashboard");
         })
     }
 
     const signOut = () => {
+        localStorage.removeItem("user");
+        setUser(null);
         firebase.auth().signOut();
     }
 
+    useEffect(() => {
+        if (!user && localStorage.getItem("user")) {
+            const localUser = JSON.parse(localStorage.getItem("user"));
+            console.log("local user = ", localUser);
+            setUser(localUser);
+        }
+    }, [])
+
     return (
-        <UserContext.Provider value={{ user, signInGoogle, signOut, getUser }}>
+        <UserContext.Provider value={{ user, signInGoogle, signOut }}>
             {props.children}
         </UserContext.Provider>
     )

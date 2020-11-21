@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from "../../context/UserContext";
 import { addPlayer } from "../../services/MongoDBService";
 import "./_Form.module.scss";
 
 const Form = (props) => {
     const { user, totalTeams, totalPlayers } = props;
+    const { signOut } = useContext(UserContext);
     const [selectedTeam, setSelectedTeam] = useState("Arsenal (1)");
     const [selectedPlayer, setSelectedPlayer] = useState({});
     const [displayedPlayer, setDisplayedPlayer] = useState("");
@@ -85,6 +87,7 @@ const Form = (props) => {
     return (
         <section>
             <h2>Select a player to follow:</h2>
+            <button onClick={signOut}>Sign out</button>
             <form>
                 <fieldset>
                     <label htmlFor="team">Team:</label>
@@ -92,7 +95,7 @@ const Form = (props) => {
                         name="teams" 
                         id="teams-options" 
                         onChange={handleChangeTeam}>
-                            {totalTeams.map(getTeamOptions)}
+                            {totalTeams ? totalTeams.map(getTeamOptions) : null}
                     </select>
                 </fieldset>
                 <fieldset>
@@ -101,7 +104,7 @@ const Form = (props) => {
                         name="players" 
                         id="players-options"
                         onChange={handleChangePlayer}>
-                            {totalPlayers.map(getPlayerOptions)}
+                            {totalPlayers ? totalPlayers.map(getPlayerOptions) : null}
                     </select>
                 </fieldset>
                 <fieldset>

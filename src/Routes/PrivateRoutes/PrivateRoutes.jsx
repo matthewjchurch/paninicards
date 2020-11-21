@@ -6,13 +6,6 @@ import firebase from  "../../firebase";
 const PrivateRoutes = (props) => {
     const { children } = props;
     const { user } = useContext(UserContext);
-
-    useEffect(() => {
-        if(!user) {
-            alert('You must be logged in to view this page. Click the Google button to sign in.');
-            navigate("/");
-        }
-    });
         
     return (
         <>
