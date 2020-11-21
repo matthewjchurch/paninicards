@@ -12,7 +12,7 @@ const Form = (props) => {
 
     const getTeamOptions = team => {
         let teamData = `${team.name} (${team.id})`
-        return <option value={teamData}>{teamData}</option>
+        return <option key={team.id} value={teamData}>{teamData}</option>
     }
     
     const getPlayerOptions = player => {
@@ -21,6 +21,7 @@ const Form = (props) => {
             let playerData = `${player.first_name} ${player.second_name} (${player.id})`
             return ( 
                 <option 
+                    key={player.id}
                     value={playerData}>
                         {playerData}
                 </option>
@@ -45,23 +46,25 @@ const Form = (props) => {
     }
 
     const playerPosition = elementType => {
+        let position = ""
         switch (elementType) {
             case 1:
-                return "Goalkeeper";
+                position = "Goalkeeper";
                 break;
             case 2:
-                return "Defender";
+                position = "Defender";
                 break;
             case 3:
-                return "Midfielder";
+                position = "Midfielder";
                 break;
             case 4:
-                return "Forward";
+                position = "Forward";
                 break;
             default:
-                return "Unknown";
+                position = "Unknown";
                 break;
         }
+        return position
     }
 
     const handleSubmit = (e) => {
@@ -85,7 +88,7 @@ const Form = (props) => {
     }, [displayedPlayer])
     
     return (
-        <section>
+        <section className={styles.formContainer}>
             <h2>Select a player to follow:</h2>
             <button className={styles.signOut} onClick={signOut}>Sign out</button>
             <form>

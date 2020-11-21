@@ -9,7 +9,7 @@ export const addPlayer = (data) => {
 
     fetch("https://sheltered-ocean-24674.herokuapp.com/addPlayer", fetchOptions)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => response)
 }
 
 export const createNewUser = (user) => {
@@ -27,7 +27,7 @@ export const createNewUser = (user) => {
 
     fetch("https://sheltered-ocean-24674.herokuapp.com/createUser", fetchOptions)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => response)
 }
 
 export const getWatchlist = (setWatchlist, user) => {

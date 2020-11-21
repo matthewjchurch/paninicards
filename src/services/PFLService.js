@@ -4,6 +4,6 @@ export const readFF = (setTotalTeams, setTotalPlayers) => {
         .then(res => {
             setTotalPlayers(res.players);
             setTotalTeams(res.teams);
-            console.log(res.players);
+            // console.log(res.players);
         })
 }
