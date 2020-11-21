@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from "../../context/UserContext";
 import { addPlayer } from "../../services/MongoDBService";
-import "./_Form.module.scss";
+import styles from "./_Form.module.scss";
 
 const Form = (props) => {
     const { user, totalTeams, totalPlayers } = props;
@@ -87,7 +87,7 @@ const Form = (props) => {
     return (
         <section>
             <h2>Select a player to follow:</h2>
-            <button onClick={signOut}>Sign out</button>
+            <button className={styles.signOut} onClick={signOut}>Sign out</button>
             <form>
                 <fieldset>
                     <label htmlFor="team">Team:</label>
@@ -112,6 +112,7 @@ const Form = (props) => {
                     <input id="img" type="text"/>
                 </fieldset>
                 <button 
+                    className={styles.submitPlayer}
                     type="submit"
                     onClick={handleSubmit}>
                         Submit player

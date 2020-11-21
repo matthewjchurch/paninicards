@@ -37,7 +37,6 @@ export const UserProvider = (props) => {
     useEffect(() => {
         if (!user && localStorage.getItem("user")) {
             const localUser = JSON.parse(localStorage.getItem("user"));
-            console.log("local user = ", localUser);
             setUser(localUser);
         }
     }, [])
