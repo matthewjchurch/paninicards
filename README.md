@@ -1,7 +1,5 @@
-The frontend to the node.js api which can be found here: https://github.com/matthewjchurch/paniniapi
+This is the frontend for my fantasy football API built here: https://github.com/matthewjchurch/paniniapi
 
-With the api above hosting, the user should be able to view a random oldskool 'Panini' football card, or add a new set of data to the database.
+The user is able to watch players and see up-to-date stats on their performances.
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Future iterations will improve the data the user can see on each player, and possibly allow them to query the dataset in a custom way.
