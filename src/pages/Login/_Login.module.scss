@@ -1,0 +1,35 @@
+@import "../../assets/variables";
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: $purple;
+    color: #FFF;
+
+    div.login__buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            margin: 20px;
+        }
+
+        .login__login {
+            background-color: $green;
+            color: $purple;
+        }
+        .login__signup {
+            background-color: $pink;
+            color: #FFF;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+@import "../../assets/variables";
+
+section.errorMain {
+    background-color: $purple;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button.home {
+        @include button-styling;
+        background-color: $green;
+    }
+}

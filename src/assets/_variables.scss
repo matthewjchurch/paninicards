@@ -1,0 +1,15 @@
+$purple: #310033;
+$green: #00FF84;
+$pink: #FF2675;
+
+@mixin button-styling {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+@mixin table-styling {
+    border: 3px solid $purple;
+    border-collapse: collapse;
+    padding: 10px;
+}
