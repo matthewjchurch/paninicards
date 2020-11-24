@@ -3,8 +3,7 @@ import { getWatchlist } from "../../../services/MongoDBService";
 import styles from "./_Watchlist.module.scss";
 
 const Watchlist = (props) => {
-    const { user } = props;
-    const [watchlist, setWatchlist] = useState([]);
+    const { watchlist } = props;
 
     const getTableJSX = (player) => {
         return (
@@ -20,13 +19,8 @@ const Watchlist = (props) => {
         )
     }
 
-    useEffect(() => {
-        if (user) {
-            getWatchlist(setWatchlist, user);
-        }
-    }, [user])
-
     return (
+        watchlist ?
         <section className={styles.tableContainer}>
             <table className={styles.watchlistTable}>
                 <thead>
@@ -42,10 +36,11 @@ const Watchlist = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {watchlist && watchlist.length ? watchlist.map(getTableJSX) : null}
+                    {watchlist.length ? watchlist.map(getTableJSX) : null}
                 </tbody>
             </table>
-        </section>
+        </section> :
+        <h2>Loading...</h2>
     )
 }
 

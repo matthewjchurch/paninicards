@@ -30,7 +30,7 @@ export const createNewUser = (user) => {
         .then(response => response)
 }
 
-export const getWatchlist = (setWatchlist, user) => {
+export const getWatchlist = (user) => {
     const data = {
         uid: user.uid
     }
@@ -44,5 +44,5 @@ export const getWatchlist = (setWatchlist, user) => {
     }
     return fetch("https://sheltered-ocean-24674.herokuapp.com/getWatchlist", fetchOptions)
         .then(res => res.json())
-        .then(res => setWatchlist(res[0].watchlist))
+        .then(res => res[0].watchlist)
 }
