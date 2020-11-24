@@ -7,7 +7,7 @@ export const addPlayer = (data) => {
         body: JSON.stringify(data),
     }
 
-    fetch("https://sheltered-ocean-24674.herokuapp.com/addPlayer", fetchOptions)
+    return fetch("https://sheltered-ocean-24674.herokuapp.com/addPlayer", fetchOptions)
         .then(response => response.json())
         .then(response => response)
 }
@@ -17,7 +17,6 @@ export const removePlayer = (user, playerID) => {
         id: playerID,
         uid: user.uid
     }
-    console.log(user);
 
     const fetchOptions = {
         method: "DELETE",
@@ -26,8 +25,8 @@ export const removePlayer = (user, playerID) => {
         },
         body: JSON.stringify(data)
     }
-    console.log(fetchOptions);
-    fetch("https://sheltered-ocean-24674.herokuapp.com/removePlayer", fetchOptions)
+
+    return fetch("https://sheltered-ocean-24674.herokuapp.com/removePlayer", fetchOptions)
         .then(response => response.json())
         .then(response => response)
 }

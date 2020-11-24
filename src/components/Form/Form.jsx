@@ -4,7 +4,7 @@ import { addPlayer } from "../../services/MongoDBService";
 import styles from "./_Form.module.scss";
 
 const Form = (props) => {
-    const { updateWatchlist, user, totalTeams, totalPlayers } = props;
+    const { setLoading, updateWatchlist, user, totalTeams, totalPlayers } = props;
     const { signOut } = useContext(UserContext);
     const [selectedTeam, setSelectedTeam] = useState("Arsenal (1)");
     const [selectedPlayer, setSelectedPlayer] = useState({});
@@ -75,8 +75,10 @@ const Form = (props) => {
             img: document.getElementById("img").value,
             ...selectedPlayer
         }
-        addPlayer(data);
-        updateWatchlist();
+
+        setLoading(true);
+        addPlayer(data)
+            .then(res => updateWatchlist())
     }
 
     useEffect(() => {

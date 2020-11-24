@@ -18,7 +18,7 @@ const Dashboard = (props) => {
         getWatchlist(user)
             .then(res => {
                 setWatchlist(res);
-                setLoading(false)
+                setLoading(false);
             })
     }
 
@@ -35,8 +35,8 @@ const Dashboard = (props) => {
     return (
         user ?
         <>
-            <Form updateWatchlist={updateWatchlist} user={user} totalTeams={totalTeams} totalPlayers={totalPlayers}  />
-            <Watchlist updateWatchlist={updateWatchlist} user={user} loading={loading} watchlist={watchlist} user={user} />
+            <Form setLoading={setLoading} updateWatchlist={updateWatchlist} user={user} totalTeams={totalTeams} totalPlayers={totalPlayers}  />
+            <Watchlist setLoading={setLoading} updateWatchlist={updateWatchlist} user={user} loading={loading} watchlist={watchlist} user={user} />
         </> :
         <Error message="Please log in to view your dashboard" />
     )

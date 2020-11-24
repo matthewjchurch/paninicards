@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./_Watchlist.module.scss";
 import { removePlayer } from "../../../services/MongoDBService";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import Modal from "../../../components/Modal";
 
 const Watchlist = (props) => {
-    const { updateWatchlist, user, loading, watchlist } = props;
+    const { setLoading, updateWatchlist, user, loading, watchlist } = props;
+    const [isModalShowing, setIsModalShowing] = useState(false);
+    const [modalContent, setModalContent] = useState(null);
 
     const handlePlayerRemove = async (userID, playerID) => {
-        removePlayer(userID, playerID);
-        updateWatchlist();
+        setLoading(true);
+        removePlayer(userID, playerID)
+            .then(res => updateWatchlist())
     }
 
     const getTableJSX = (player) => {
@@ -28,7 +32,6 @@ const Watchlist = (props) => {
                         icon={faUser} 
                     />
                     <FontAwesomeIcon 
-                        // id={player.id}
                         onClick={e => handlePlayerRemove(user, player.id)}
                         className={`${styles.fa} ${styles.remove}`} 
                         icon={faTimesCircle} 
@@ -39,7 +42,8 @@ const Watchlist = (props) => {
     }
 
     return (
-        watchlist ?
+        loading ? <h2>Loading...</h2> :
+        watchlist && watchlist.length ?
         <section className={styles.tableContainer}>
             <table className={styles.watchlistTable}>
                 <thead>
@@ -59,8 +63,8 @@ const Watchlist = (props) => {
                     {watchlist.length ? watchlist.map(getTableJSX) : null}
                 </tbody>
             </table>
+
         </section> :
-        loading ? <h2>Loading...</h2> :
         <h2>Add some players to your watchlist above</h2>
     )
 }
