@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { getWatchlist } from "../../../services/MongoDBService";
+import React from "react";
 import styles from "./_Watchlist.module.scss";
+import { removePlayer } from "../../../services/MongoDBService";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Watchlist = (props) => {
-    const { watchlist } = props;
+    const { updateWatchlist, user, loading, watchlist } = props;
+
+    const handlePlayerRemove = async (userID, playerID) => {
+        removePlayer(userID, playerID);
+        updateWatchlist();
+    }
 
     const getTableJSX = (player) => {
         return (
@@ -15,6 +22,18 @@ const Watchlist = (props) => {
                 <td>{player.points_per_game}</td>
                 <td>{player.goals_scored}</td>
                 <td>{player.assists}</td>
+                <td className={styles.buttonContainer}>
+                    <FontAwesomeIcon 
+                        className={styles.fa} 
+                        icon={faUser} 
+                    />
+                    <FontAwesomeIcon 
+                        // id={player.id}
+                        onClick={e => handlePlayerRemove(user, player.id)}
+                        className={`${styles.fa} ${styles.remove}`} 
+                        icon={faTimesCircle} 
+                    />
+                </td>
             </tr>
         )
     }
@@ -32,6 +51,7 @@ const Watchlist = (props) => {
                         <th>PPG</th>
                         <th>Goals</th>
                         <th>Assists</th>
+                        <th></th>
                         {/* th* */}
                     </tr>
                 </thead>
@@ -40,7 +60,8 @@ const Watchlist = (props) => {
                 </tbody>
             </table>
         </section> :
-        <h2>Loading...</h2>
+        loading ? <h2>Loading...</h2> :
+        <h2>Add some players to your watchlist above</h2>
     )
 }
 

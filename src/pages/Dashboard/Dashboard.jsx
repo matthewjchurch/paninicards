@@ -11,11 +11,14 @@ const Dashboard = (props) => {
     const [totalPlayers, setTotalPlayers] = useState([]);
     const [totalTeams, setTotalTeams] = useState([]);
     const [watchlist, setWatchlist] = useState(null);
+    const [loading, setLoading] = useState(false)
 
     const updateWatchlist = () => {
+        setLoading(true);
         getWatchlist(user)
             .then(res => {
                 setWatchlist(res);
+                setLoading(false)
             })
     }
 
@@ -33,7 +36,7 @@ const Dashboard = (props) => {
         user ?
         <>
             <Form updateWatchlist={updateWatchlist} user={user} totalTeams={totalTeams} totalPlayers={totalPlayers}  />
-            <Watchlist watchlist={watchlist} user={user} />
+            <Watchlist updateWatchlist={updateWatchlist} user={user} loading={loading} watchlist={watchlist} user={user} />
         </> :
         <Error message="Please log in to view your dashboard" />
     )

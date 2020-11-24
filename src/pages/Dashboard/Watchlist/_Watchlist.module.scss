@@ -11,8 +11,15 @@ section.tableContainer {
         @include table-styling;
 
         th, td {
-            @include table-styling
-            
+            @include table-styling;
+
+            .fa {
+                margin-left: 5px;
+                color: $purple;
+            }
+            .remove {
+                color: $pink;
+            }
         }
     }
 }

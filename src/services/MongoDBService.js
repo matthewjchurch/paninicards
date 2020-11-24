@@ -12,6 +12,26 @@ export const addPlayer = (data) => {
         .then(response => response)
 }
 
+export const removePlayer = (user, playerID) => {
+    const data = {
+        id: playerID,
+        uid: user.uid
+    }
+    console.log(user);
+
+    const fetchOptions = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }
+    console.log(fetchOptions);
+    fetch("https://sheltered-ocean-24674.herokuapp.com/removePlayer", fetchOptions)
+        .then(response => response.json())
+        .then(response => response)
+}
+
 export const createNewUser = (user) => {
     const data = {
         uid: user.uid
