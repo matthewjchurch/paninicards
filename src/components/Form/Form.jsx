@@ -94,7 +94,7 @@ const Form = (props) => {
             <h2>Select a player to follow:</h2>
             <button className={styles.signOut} onClick={signOut}>Sign out</button>
             <form>
-                <fieldset>
+                <section className={styles.options}>
                     <label htmlFor="team">Team:</label>
                     <select 
                         name="teams" 
@@ -102,8 +102,6 @@ const Form = (props) => {
                         onChange={handleChangeTeam}>
                             {totalTeams ? totalTeams.map(getTeamOptions) : null}
                     </select>
-                </fieldset>
-                <fieldset>
                     <label htmlFor="name">Player:</label>
                     <select 
                         name="players" 
@@ -111,11 +109,9 @@ const Form = (props) => {
                         onChange={handleChangePlayer}>
                             {totalPlayers ? totalPlayers.map(getPlayerOptions) : null}
                     </select>
-                </fieldset>
-                <fieldset>
                     <label htmlFor="img">Image URL (optional):</label>
                     <input id="img" type="text"/>
-                </fieldset>
+                </section>
                 <button 
                     className={styles.submitPlayer}
                     type="submit"

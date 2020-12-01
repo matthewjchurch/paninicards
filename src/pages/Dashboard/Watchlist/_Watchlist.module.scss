@@ -12,6 +12,7 @@ section.tableContainer {
 
         th, td {
             @include table-styling;
+            font-size: 14px;
 
             .fa {
                 margin-left: 5px;
