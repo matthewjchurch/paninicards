@@ -14,7 +14,7 @@ const Login = () => {
             <h1>Golazio</h1>
             <div className={styles.login__buttons}>
                 <button className={styles.login__login} onClick={handleLogin}>Log in</button>
-                <button className={styles.login__signup}>Sign up</button>
+                {/* <button className={styles.login__signup}>Sign up</button> */}
             </div>
         </main>
     )
