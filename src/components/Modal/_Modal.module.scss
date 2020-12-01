@@ -1,0 +1,69 @@
+@import "../../assets/variables";
+
+section.totalModal {
+
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(49, 0, 51, 0.6);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    article.modal {
+        height: 70vh;
+        width: 85vw;
+        background-color: white;
+        padding: 0.8rem;
+
+        div.modalHeader { 
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            
+            h3 {
+                margin: 0;
+            }
+            .remove {
+                color: $pink;
+            }
+        }
+
+        table.ict_total {
+            @include table-styling;
+            width: 100%;
+            margin-top: 0.5rem;
+            
+            tbody {
+                width: 100%;
+                margin-top: 0;
+                
+                background-color: $purple;
+                color: white;
+
+                tr {
+                    display: flex;
+                    justify-content: space-evenly;
+                }
+            }
+        }
+
+        table.ict {
+            border: 2px solid $purple;
+            border-collapse: collapse;
+            width: 100%;
+
+            tr {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                
+                td {
+                    border: 1px solid $purple;
+                    padding-top: 0.5rem;
+                }
+            }
+        }
+    }
+}

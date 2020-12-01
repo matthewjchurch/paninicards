@@ -4,18 +4,20 @@ import { addPlayer } from "../../services/MongoDBService";
 import styles from "./_Form.module.scss";
 
 const Form = (props) => {
-    const { user, totalTeams, totalPlayers } = props;
+    const { setLoading, updateWatchlist, user, totalTeams, totalPlayers } = props;
     const { signOut } = useContext(UserContext);
     const [selectedTeam, setSelectedTeam] = useState("Arsenal (1)");
     const [selectedPlayer, setSelectedPlayer] = useState({});
     const [displayedPlayer, setDisplayedPlayer] = useState("");
 
     const getTeamOptions = team => {
+        // Renders all teams from the FF data
         let teamData = `${team.name} (${team.id})`
         return <option key={team.id} value={teamData}>{teamData}</option>
     }
     
     const getPlayerOptions = player => {
+        // Renders all players based on the team selection
         let id = selectedTeam.match(/\d+/gm);
         if (player.team === parseInt(id[0])) {
             let playerData = `${player.first_name} ${player.second_name} (${player.id})`
@@ -30,11 +32,29 @@ const Form = (props) => {
     }
 
     const findPlayer = displayVal => {
+        // Grabs the ID from the player display name and returns all related data
         const id = parseInt(displayVal.match(/\d+/gm)[0]);
         return totalPlayers.filter(player => player.id === id)[0]
     }
 
+    const playerPosition = elementType => {
+        // Returns a text-based position for the player
+        switch (elementType) {
+            case 1:
+                return "Goalkeeper";
+            case 2:
+                return "Defender";
+            case 3:
+                return "Midfielder";
+            case 4:
+                return "Forward";
+            default:
+                return "Unknown";
+    }
+}
+
     const handleChangeTeam = e => {
+        // Sets the team and updates the players to select from once this is done
         setSelectedTeam(e.target.value);
         setTimeout(() => {
             setSelectedPlayer(findPlayer(document.getElementById("players-options").value))
@@ -42,29 +62,8 @@ const Form = (props) => {
     }
 
     const handleChangePlayer = e => {
+        // Sets the selected player in state
         setSelectedPlayer(findPlayer(e.target.value));
-    }
-
-    const playerPosition = elementType => {
-        let position = ""
-        switch (elementType) {
-            case 1:
-                position = "Goalkeeper";
-                break;
-            case 2:
-                position = "Defender";
-                break;
-            case 3:
-                position = "Midfielder";
-                break;
-            case 4:
-                position = "Forward";
-                break;
-            default:
-                position = "Unknown";
-                break;
-        }
-        return position
     }
 
     const handleSubmit = (e) => {
@@ -76,7 +75,10 @@ const Form = (props) => {
             img: document.getElementById("img").value,
             ...selectedPlayer
         }
-        addPlayer(data);
+
+        setLoading(true);
+        addPlayer(data)
+            .then(res => updateWatchlist())
     }
 
     useEffect(() => {
@@ -92,7 +94,7 @@ const Form = (props) => {
             <h2>Select a player to follow:</h2>
             <button className={styles.signOut} onClick={signOut}>Sign out</button>
             <form>
-                <fieldset>
+                <section className={styles.options}>
                     <label htmlFor="team">Team:</label>
                     <select 
                         name="teams" 
@@ -100,8 +102,6 @@ const Form = (props) => {
                         onChange={handleChangeTeam}>
                             {totalTeams ? totalTeams.map(getTeamOptions) : null}
                     </select>
-                </fieldset>
-                <fieldset>
                     <label htmlFor="name">Player:</label>
                     <select 
                         name="players" 
@@ -109,11 +109,9 @@ const Form = (props) => {
                         onChange={handleChangePlayer}>
                             {totalPlayers ? totalPlayers.map(getPlayerOptions) : null}
                     </select>
-                </fieldset>
-                <fieldset>
                     <label htmlFor="img">Image URL (optional):</label>
                     <input id="img" type="text"/>
-                </fieldset>
+                </section>
                 <button 
                     className={styles.submitPlayer}
                     type="submit"
