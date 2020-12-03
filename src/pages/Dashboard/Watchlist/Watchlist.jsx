@@ -1,23 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "./_Watchlist.module.scss";
-import { removePlayer } from "../../../services/MongoDBService";
 import { ModalContext } from "../../../context/ModalContext"
 import Modal from "../../../components/Modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Watchlist = (props) => {
     const { setLoading, updateWatchlist, user, loading, watchlist } = props;
     const [modalState, setModalState] = useContext(ModalContext);
 
-    const handlePlayerRemove = async (userID, playerID) => {
-        setLoading(true);
-        removePlayer(userID, playerID)
-            .then(res => updateWatchlist())
-    }
-
     const handleModal = (player) => {
-        setModalState({ ...modalState, modal: true, player, handlePlayerRemove, user })
+        setModalState({ ...modalState, modal: true, player, user })
     }
 
     const getTableJSX = (player) => {
@@ -52,7 +43,7 @@ const Watchlist = (props) => {
                     {watchlist.length ? watchlist.map(getTableJSX) : null}
                 </tbody>
             </table>
-            {modalState.modal ? <Modal handlePlayerRemove={handlePlayerRemove} /> : null}
+            {modalState.modal ? <Modal setLoading={setLoading} updateWatchlist={updateWatchlist} /> : null}
         </section> :
         <h2>Add some players to your watchlist above</h2>
     )

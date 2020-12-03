@@ -19,10 +19,12 @@ section.tableContainer {
         th {
             background-color: $purple;
             color: white;
+            
         }
 
         .modalButton {
             background-color: $green;
+            cursor: pointer;
         }
     }
 }

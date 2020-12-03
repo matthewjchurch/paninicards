@@ -12,10 +12,10 @@ export const addPlayer = (data) => {
         .then(response => response)
 }
 
-export const removePlayer = (user, playerID) => {
+export const removePlayer = (userID, playerID) => {
     const data = {
         id: playerID,
-        uid: user.uid
+        uid: userID
     }
 
     const fetchOptions = {

@@ -2,10 +2,21 @@ $purple: #310033;
 $green: #00FF84;
 $pink: #FF2675;
 
-@mixin button-styling {
+@mixin button-primary {
+    font-weight: bold;
     border: none;
     border-radius: 10px;
     padding: 10px;
+    background-color: $green;
+}
+
+@mixin button-secondary {
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: $pink;
+    color: white;
 }
 
 @mixin table-styling {
