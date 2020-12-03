@@ -21,34 +21,28 @@ const Modal = (props) => {
                             icon={faTimesCircle} 
                         />
                     </div>
-                    <table className={styles.ict_total}>
-                        <tbody>
-                            <tr>
-                                <td>ICT Score: {player.ict_index}</td>
-                                <td>ICT Rank: {player.ict_index_rank}</td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <table className={styles.ict}>
                         <thead>
                             <tr>
                                 <td></td>
-                                <td>Influence</td>
-                                <td>Creativity</td>
-                                <td>Threat</td>
+                                <td>ICT Score: {player.ict_index}</td>
+                                <td>ICT Rank: {player.ict_index_rank}</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Score</td>
+                                <td>Influence</td>
                                 <td>{player.influence}</td>
-                                <td>{player.creativity}</td>
-                                <td>{player.threat}</td>
+                                <td>{player.influence_rank}</td>
                             </tr>
                             <tr>
-                                <td>Rank</td>
-                                <td>{player.influence_rank}</td>
+                                <td>Creativity</td>
+                                <td>{player.creativity}</td>
                                 <td>{player.creativity_rank}</td>
+                            </tr>
+                            <tr>
+                                <td>Threat</td>
+                                <td>{player.threat}</td>
                                 <td>{player.threat_rank}</td>
                             </tr>
                         </tbody>

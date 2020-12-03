@@ -31,33 +31,21 @@ section.totalModal {
             }
         }
 
-        table.ict_total {
-            @include table-styling;
-            width: 100%;
-            margin-top: 0.5rem;
-            
-            tbody {
-                width: 100%;
-                margin-top: 0;
-                
-                background-color: $purple;
-                color: white;
-
-                tr {
-                    display: flex;
-                    justify-content: space-evenly;
-                }
-            }
-        }
-
         table.ict {
+            @include table-styling;
             border: 2px solid $purple;
             border-collapse: collapse;
             width: 100%;
+            margin-top: 0.5rem;
+
+            thead {
+                background-color: $purple;
+                color: white;
+            }
 
             tr {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 
                 td {
                     border: 1px solid $purple;
