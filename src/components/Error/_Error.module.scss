@@ -11,7 +11,6 @@ section.errorMain {
     align-items: center;
 
     button.home {
-        @include button-styling;
-        background-color: $green;
+        @include button-primary;
     }
 }

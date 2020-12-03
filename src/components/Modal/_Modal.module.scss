@@ -13,12 +13,20 @@ section.totalModal {
     left: 0px;
 
     article.modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         height: 70vh;
         width: 85vw;
         background-color: white;
         padding: 0.8rem;
 
+        > * {
+            margin-top: 0.5rem;
+        }
+
         div.modalHeader { 
+            width: 100%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -36,7 +44,6 @@ section.totalModal {
             border: 2px solid $purple;
             border-collapse: collapse;
             width: 100%;
-            margin-top: 0.5rem;
 
             thead {
                 background-color: $purple;
@@ -52,6 +59,10 @@ section.totalModal {
                     padding-top: 0.5rem;
                 }
             }
+        }
+
+        button.remove {
+            @include button-secondary;
         }
     }
 }

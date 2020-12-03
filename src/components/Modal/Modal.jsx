@@ -3,11 +3,19 @@ import { ModalContext } from "../../context/ModalContext";
 import styles from "./_Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { removePlayer } from "../../services/MongoDBService";
 
 const Modal = (props) => {
     const [state, setState] = useContext(ModalContext);
-    const { player } = state;
-    const { handlePlayerRemove } = props;
+    const { player, user } = state;
+    const { setLoading, updateWatchlist } = props;
+
+    const handlePlayerRemove = async (userID, playerID) => {
+        setState({ ...state, modal: false, player: {} });
+        setLoading(true);
+        removePlayer(userID, playerID)
+            .then(res => updateWatchlist())
+    }
 
     if (state.modal) {
         return (
@@ -47,7 +55,7 @@ const Modal = (props) => {
                             </tr>
                         </tbody>
                     </table>
-                    {/* <button onClick={() =>}>Remove from watchlist</button> */}
+                    <button className={styles.remove} onClick={() => handlePlayerRemove(user.uid, player.id)}>Remove from watchlist</button>
                 </article>
             </section>
         )
