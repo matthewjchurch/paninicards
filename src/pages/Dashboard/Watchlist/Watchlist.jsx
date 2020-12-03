@@ -30,11 +30,6 @@ const Watchlist = (props) => {
                 <td>{player.now_cost/10}m</td>
                 <td>{player.total_points}</td>
                 <td>{player.points_per_game}</td>
-                    {/* <FontAwesomeIcon 
-                        onClick={e => handlePlayerRemove(user, player.id)}
-                        className={`${styles.fa} ${styles.remove}`} 
-                        icon={faTimesCircle} 
-                    /> */}
             </tr>
         )
     }
@@ -57,7 +52,7 @@ const Watchlist = (props) => {
                     {watchlist.length ? watchlist.map(getTableJSX) : null}
                 </tbody>
             </table>
-            {modalState.modal ? <Modal /> : null}
+            {modalState.modal ? <Modal handlePlayerRemove={handlePlayerRemove} /> : null}
         </section> :
         <h2>Add some players to your watchlist above</h2>
     )

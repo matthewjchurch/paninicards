@@ -7,9 +7,9 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 const Modal = (props) => {
     const [state, setState] = useContext(ModalContext);
     const { player } = state;
+    const { handlePlayerRemove } = props;
 
     if (state.modal) {
-        console.log(player);
         return (
             <section className={styles.totalModal}>
                 <article className={styles.modal}>
@@ -47,6 +47,7 @@ const Modal = (props) => {
                             </tr>
                         </tbody>
                     </table>
+                    {/* <button onClick={() =>}>Remove from watchlist</button> */}
                 </article>
             </section>
         )

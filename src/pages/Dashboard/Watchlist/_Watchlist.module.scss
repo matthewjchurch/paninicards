@@ -9,18 +9,20 @@ section.tableContainer {
 
     table.watchlistTable {
         @include table-styling;
+        width: clamp(60vw, 60vw, 80vw);
 
         th, td {
             @include table-styling;
             font-size: 14px;
+        }
 
-            .fa {
-                margin-left: 5px;
-                color: $purple;
-            }
-            .remove {
-                color: $pink;
-            }
+        th {
+            background-color: $purple;
+            color: white;
+        }
+
+        .modalButton {
+            background-color: $green;
         }
     }
 }
