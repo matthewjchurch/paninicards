@@ -8,7 +8,7 @@ export const readFFPlayers = (setTotalTeams, setTotalPlayers) => {
         })
 }
 
-export const readFFFixtures = teamID => {
+export const convertTeamID = async teamID => {
 
     if (teamID === "AVL") teamID = "AST";
     if (teamID === "SHU") teamID = "SHE";
@@ -24,7 +24,27 @@ export const readFFFixtures = teamID => {
         },
         body: JSON.stringify(data)
     }
-    fetch("http://localhost:8080/getTeamID", fetchOptions)
+    const convertedID = await fetch("http://localhost:8080/getTeamID", fetchOptions)
+        .then(res => res.json())
+        .then(res => res);
+    
+    return convertedID;
+}
+
+export const readFFFixtures = teamID => {
+
+    const data = {
+        id: teamID
+    }
+
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }
+    fetch("http://localhost:8080/getTeamFixtures", fetchOptions)
         .then(res => res.json())
         .then(res => console.log(res));
 }

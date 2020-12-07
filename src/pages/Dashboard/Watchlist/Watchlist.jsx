@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import styles from "./_Watchlist.module.scss";
 import { ModalContext } from "../../../context/ModalContext";
-
 import Modal from "../../../components/Modal";
 
 const Watchlist = (props) => {

@@ -4,11 +4,12 @@ import styles from "./_Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { removePlayer } from "../../services/MongoDBService";
-import { readFFFixtures } from "../../services/PFLService";
+import { convertTeamID, readFFFixtures } from "../../services/PFLService";
 
 const Modal = (props) => {
     const [state, setState] = useContext(ModalContext);
     const [teamCode, setTeamCode] = useState("");
+    const [matchday, setMatchday] = useState(null);
     const { player, user } = state;
     const { totalTeams, setLoading, updateWatchlist } = props;
 
@@ -20,17 +21,21 @@ const Modal = (props) => {
     }
 
     const convertTeamCode = () => {
-        const playerTeam = totalTeams.filter(team => player.team === team.id)
-        readFFFixtures(playerTeam[0].short_name)
+        const playerTeam = totalTeams.filter(team => player.team === team.id)[0];
+        convertTeamID(playerTeam.short_name)
+            .then(res => {
+                setMatchday(res.matchday);
+                setTeamCode(res.team.id);
+        });
     }
 
     useEffect(() => {
         convertTeamCode()
     }, [])
 
-    // useEffect(() => {
-    //     readFFFixtures(teamCode)
-    // }, [teamCode])
+    useEffect(() => {
+        readFFFixtures(teamCode)
+    }, [teamCode])
 
     if (state.modal) {
         return (
