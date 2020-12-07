@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
-import { readFF } from "../../services/PFLService";
+import { readFFPlayers } from "../../services/PFLService";
 import Form from '../../components/Form'
 import Watchlist from './Watchlist/Watchlist';
 import Error from "../../components/Error";
@@ -23,7 +23,7 @@ const Dashboard = (props) => {
     }
 
     useEffect(() => {
-        readFF(setTotalTeams, setTotalPlayers);
+        readFFPlayers(setTotalTeams, setTotalPlayers);
     }, [])
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const Dashboard = (props) => {
         user ?
         <>
             <Form setLoading={setLoading} updateWatchlist={updateWatchlist} user={user} totalTeams={totalTeams} totalPlayers={totalPlayers}  />
-            <Watchlist setLoading={setLoading} updateWatchlist={updateWatchlist} user={user} loading={loading} watchlist={watchlist} user={user} />
+            <Watchlist totalTeams={totalTeams} setLoading={setLoading} updateWatchlist={updateWatchlist} user={user} loading={loading} watchlist={watchlist} user={user} />
         </> :
         <Error message="Please log in to view your dashboard" />
     )

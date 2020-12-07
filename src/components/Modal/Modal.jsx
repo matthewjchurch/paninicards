@@ -1,14 +1,16 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ModalContext } from "../../context/ModalContext";
 import styles from "./_Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { removePlayer } from "../../services/MongoDBService";
+import { readFFFixtures } from "../../services/PFLService";
 
 const Modal = (props) => {
     const [state, setState] = useContext(ModalContext);
+    const [teamCode, setTeamCode] = useState("");
     const { player, user } = state;
-    const { setLoading, updateWatchlist } = props;
+    const { totalTeams, setLoading, updateWatchlist } = props;
 
     const handlePlayerRemove = async (userID, playerID) => {
         setState({ ...state, modal: false, player: {} });
@@ -16,6 +18,19 @@ const Modal = (props) => {
         removePlayer(userID, playerID)
             .then(res => updateWatchlist())
     }
+
+    const convertTeamCode = () => {
+        const playerTeam = totalTeams.filter(team => player.team === team.id)
+        readFFFixtures(playerTeam[0].short_name)
+    }
+
+    useEffect(() => {
+        convertTeamCode()
+    }, [])
+
+    // useEffect(() => {
+    //     readFFFixtures(teamCode)
+    // }, [teamCode])
 
     if (state.modal) {
         return (
