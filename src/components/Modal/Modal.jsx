@@ -10,6 +10,7 @@ const Modal = (props) => {
     const [state, setState] = useContext(ModalContext);
     const [teamCode, setTeamCode] = useState("");
     const [matchday, setMatchday] = useState(null);
+    const [fixtures, setFixtures] = useState([]);
     const { player, user } = state;
     const { totalTeams, setLoading, updateWatchlist } = props;
 
@@ -29,16 +30,39 @@ const Modal = (props) => {
         });
     }
 
+    const getFixturesJSX = fixture => {
+        let opposition = teamCode == fixture.awayTeam.id ? 
+            fixture.homeTeam.name.slice(0, -3) : 
+            fixture.awayTeam.name.slice(0, -3);
+
+        let homeAway = teamCode == fixture.awayTeam.id ? 
+            "(A)" : 
+            "(H)";
+
+        return (
+            <td key={opposition}>{opposition} {homeAway}</td>
+        )
+    };    
+    
+    const getFixtureDate = fixture => {
+        let fixtureDate = new Date(fixture.utcDate);
+        let day = fixtureDate.getDate();
+        let month = fixtureDate.getMonth();
+        return (
+            <td key={fixture.id}>{`${day}/${month}`}</td>
+        )
+    };
+
     useEffect(() => {
         convertTeamCode()
     }, [])
 
     useEffect(() => {
         readFFFixtures(teamCode)
+            .then(res => setFixtures(res))
     }, [teamCode])
-
-    if (state.modal) {
-        return (
+    
+        return state.modal ? (
             <section className={styles.totalModal}>
                 <article className={styles.modal}>
                     <div className={styles.modalHeader}>
@@ -75,11 +99,26 @@ const Modal = (props) => {
                             </tr>
                         </tbody>
                     </table>
+                    <div className={styles.modalHeader}>
+                        <h3>Upcoming fixtures:</h3>
+                    </div>
+                    <table className={styles.fixtures}>
+                        <thead>
+                            <tr>
+                                {fixtures.length ? fixtures.map(getFixtureDate) : null}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {fixtures.length ? fixtures.map(getFixturesJSX) : null}
+                            </tr>
+                        </tbody>
+                    </table>
                     <button className={styles.remove} onClick={() => handlePlayerRemove(user.uid, player.id)}>Remove from watchlist</button>
                 </article>
             </section>
-        )
-    }
+        ) : null;
+    
 }
 
 export default Modal;

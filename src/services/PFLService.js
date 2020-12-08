@@ -4,7 +4,6 @@ export const readFFPlayers = (setTotalTeams, setTotalPlayers) => {
         .then(res => {
             setTotalPlayers(res.players);
             setTotalTeams(res.teams);
-            console.log(res);
         })
 }
 
@@ -24,7 +23,7 @@ export const convertTeamID = async teamID => {
         },
         body: JSON.stringify(data)
     }
-    const convertedID = await fetch("http://localhost:8080/getTeamID", fetchOptions)
+    const convertedID = await fetch("https://sheltered-ocean-24674.herokuapp.com/getTeamID", fetchOptions)
         .then(res => res.json())
         .then(res => res);
     
@@ -44,7 +43,7 @@ export const readFFFixtures = teamID => {
         },
         body: JSON.stringify(data)
     }
-    fetch("http://localhost:8080/getTeamFixtures", fetchOptions)
+    return fetch("https://sheltered-ocean-24674.herokuapp.com/getTeamFixtures", fetchOptions)
         .then(res => res.json())
-        .then(res => console.log(res));
+        .then(res => res);
 }

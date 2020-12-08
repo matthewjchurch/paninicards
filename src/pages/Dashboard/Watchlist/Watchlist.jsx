@@ -6,10 +6,8 @@ import Modal from "../../../components/Modal";
 const Watchlist = (props) => {
     const { totalTeams, setLoading, updateWatchlist, user, loading, watchlist } = props;
     const [modalState, setModalState] = useContext(ModalContext);
-    // const [teamID, setTeamID] = useState("");
 
     const handleModal = (player) => {
-        // setTeamID(readFFFixtures);
         setModalState({ ...modalState, modal: true, player, user })
     }
 
