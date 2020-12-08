@@ -20,12 +20,8 @@ function App() {
 
         fetch("https://sheltered-ocean-24674.herokuapp.com/delete", fetchOptions)
             .then(response => response.json())
-            .then(response => console.log(response))
+            .then(response => response)
   }
-
-  useEffect(() => {
-    // read();
-  }, [])
 
   return (
     <UserProvider> 
