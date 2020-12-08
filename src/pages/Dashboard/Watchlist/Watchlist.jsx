@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./_Watchlist.module.scss";
-import { ModalContext } from "../../../context/ModalContext"
+import { ModalContext } from "../../../context/ModalContext";
 import Modal from "../../../components/Modal";
 
 const Watchlist = (props) => {
-    const { setLoading, updateWatchlist, user, loading, watchlist } = props;
+    const { totalTeams, setLoading, updateWatchlist, user, loading, watchlist } = props;
     const [modalState, setModalState] = useContext(ModalContext);
 
     const handleModal = (player) => {
@@ -43,7 +43,7 @@ const Watchlist = (props) => {
                     {watchlist.length ? watchlist.map(getTableJSX) : null}
                 </tbody>
             </table>
-            {modalState.modal ? <Modal setLoading={setLoading} updateWatchlist={updateWatchlist} /> : null}
+            {modalState.modal ? <Modal totalTeams={totalTeams} setLoading={setLoading} updateWatchlist={updateWatchlist} /> : null}
         </section> :
         <h2>Add some players to your watchlist above</h2>
     )

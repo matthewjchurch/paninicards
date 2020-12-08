@@ -15,7 +15,7 @@ section.totalModal {
     article.modal {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: left;
         height: 70vh;
         width: 85vw;
         background-color: white;
@@ -39,30 +39,46 @@ section.totalModal {
             }
         }
 
-        table.ict {
+        table {
             @include table-styling;
+            width: 100%;
             border: 2px solid $purple;
             border-collapse: collapse;
-            width: 100%;
 
             thead {
                 background-color: $purple;
                 color: white;
             }
 
+            tr td {
+                border: 1px solid $purple;
+                padding: 0.25rem;
+            }
+        }
+
+        table.ict {
+            margin-bottom: 5px;
+
             tr {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 
-                td {
-                    border: 1px solid $purple;
-                    padding-top: 0.5rem;
-                }
             }
         }
 
         button.remove {
             @include button-secondary;
+            width: 200px;
+            align-self: center;
+        }
+
+        h3 {
+            margin: 0;
+        }
+
+        table.fixtures {
+            text-align: center;
+            
         }
     }
 }
