@@ -76,9 +76,13 @@ section.totalModal {
             margin: 0;
         }
 
-        table.fixtures {
-            text-align: center;
+        div.fixturesContainer {
+            overflow-x: auto;
             
+            table.fixtures {
+                text-align: center;
+                overflow: scroll;
+            }
         }
     }
 }

@@ -102,18 +102,20 @@ const Modal = (props) => {
                     <div className={styles.modalHeader}>
                         <h3>Upcoming fixtures:</h3>
                     </div>
-                    <table className={styles.fixtures}>
-                        <thead>
-                            <tr>
-                                {fixtures.length ? fixtures.map(getFixtureDate) : null}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {fixtures.length ? fixtures.map(getFixturesJSX) : null}
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className={styles.fixturesContainer}>
+                        <table className={styles.fixtures}>
+                            <thead>
+                                <tr>
+                                    {fixtures.length ? fixtures.map(getFixtureDate) : null}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {fixtures.length ? fixtures.map(getFixturesJSX) : null}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <button className={styles.remove} onClick={() => handlePlayerRemove(user.uid, player.id)}>Remove from watchlist</button>
                 </article>
             </section>
