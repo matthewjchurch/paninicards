@@ -43,7 +43,7 @@ export const readFFFixtures = teamID => {
         },
         body: JSON.stringify(data)
     }
-    return fetch("http://localhost:8080/getTeamFixtures", fetchOptions)
+    return fetch("https://sheltered-ocean-24674.herokuapp.com/getTeamFixtures", fetchOptions)
         .then(res => res.json())
         .then(res => res);
 }
